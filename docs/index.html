@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>gcontacts Documentation</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 48px 24px;
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: #e2e8f0;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-size: 28px;
+      }
+      .intro {
+        font-size: 16px;
+        color: #e2e8f0;
+      }
+      p {
+        margin: 0 0 16px;
+        color: #cbd5f5;
+      }
+      ul {
+        margin: 12px 0 0;
+        padding-left: 18px;
+      }
+      a {
+        color: #93c5fd;
+      }
+      .section {
+        margin-top: 28px;
+      }
+      .muted {
+        color: #94a3b8;
+        font-size: 14px;
+        margin: 6px 0 0;
+      }
+      .code {
+        background: #0b1220;
+        border: 1px solid #1e293b;
+        border-radius: 10px;
+        padding: 16px;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: 13px;
+        line-height: 1.5;
+        color: #e2e8f0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>module/gcontacts - V8 module</h1>
+      <p class="intro">Google Contacts wrapper built on gauth@1.0.0 and People API.</p>
+      <p class="muted">Learn more at <a href="https://instago.ai" target="_blank" rel="noopener">https://instago.ai</a>.</p>
+      <div class="section">
+        <h2>Technical reference</h2>
+        <h1>@instago/gcontacts</h1>
+<p>Google Contacts wrapper built on <code>gauth@1.0.0</code> and People API.</p>
+<ul>
+<li>Version: 1.0.0</li>
+<li>Entry: index.js</li>
+<li>Exports: <code>list</code>, <code>search</code>, <code>get</code>, <code>otherList</code>, <code>otherSearch</code>, <code>create</code>, <code>update</code>, <code>remove</code>, <code>directoryList</code>, <code>directorySearch</code></li>
+<li>Dependencies: <code>http@1.0.0</code>, <code>auth@1.0.0</code>, <code>gauth@1.0.0</code>, <code>qs@1.0.0</code></li>
+</ul>
+<h2>Auth and configuration</h2>
+<p>You must configure <code>gauth@1.0.0</code> before using gcontacts. Provide the required env keys so the helper can mint tokens:</p>
+<ul>
+<li><code>gauth.clientId</code></li>
+<li><code>gauth.clientSecret</code></li>
+</ul>
+<p><code>gauth</code> handles refresh tokens internally, so there’s no need to expose them here.</p>
+<p>Optional env:</p>
+<ul>
+<li><code>gauth.scope</code> or <code>google.scope</code></li>
+<li><code>gauth.tokenEndpoint</code> (if you need a custom token URL)</li>
+</ul>
+<p>Common scopes:</p>
+<ul>
+<li><code>contacts</code> (rw), <code>contacts.readonly</code></li>
+<li><code>directory.readonly</code> (Workspace directory)</li>
+<li><code>all</code> or <code>*</code> for every mapped scope</li>
+</ul>
+<p>Configure once, then call gcontacts methods with the desired scope overrides.</p>
+<h2>Usage</h2>
+<pre class="code"><code>
+const gauth = require(&#x27;gauth@1.0.0&#x27;);
+const gcontacts = require(&#x27;gcontacts@1.0.0&#x27;);
+
+gauth.configure({
+  clientId: sys.env.get(&#x27;gauth.clientId&#x27;),
+  clientSecret: sys.env.get(&#x27;gauth.clientSecret&#x27;),
+});
+</code></pre>
+<h2>Examples</h2>
+<p>Personal contacts:</p>
+<pre class="code"><code>
+await gcontacts.list({ maxResults: 50 });
+await gcontacts.search({ query: &#x27;Ada&#x27;, maxResults: 50 });
+await gcontacts.get({ resourceNameOrEmail: &#x27;people/123&#x27; });
+await gcontacts.get({ resourceNameOrEmail: &#x27;user@example.com&#x27; });
+</code></pre>
+<p>Other contacts:</p>
+<pre class="code"><code>
+await gcontacts.otherList({ maxResults: 50 });
+await gcontacts.otherSearch({ query: &#x27;John&#x27;, maxResults: 50 });
+</code></pre>
+<p>Create and update:</p>
+<pre class="code"><code>
+await gcontacts.create({
+  givenName: &#x27;John&#x27;,
+  familyName: &#x27;Doe&#x27;,
+  email: &#x27;john@example.com&#x27;,
+  phone: &#x27;+1234567890&#x27;
+});
+
+await gcontacts.update({
+  resourceName: &#x27;people/123&#x27;,
+  givenName: &#x27;Jane&#x27;,
+  email: &#x27;jane@example.com&#x27;
+});
+
+await gcontacts.remove({ resourceName: &#x27;people/123&#x27; });
+</code></pre>
+<p>Directory (Workspace):</p>
+<pre class="code"><code>
+await gcontacts.directoryList({ maxResults: 50 });
+await gcontacts.directorySearch({ query: &#x27;Jane&#x27;, maxResults: 50 });
+</code></pre>
+<p>--- For more details, visit https://instago.ai.</p>
+      </div>
+      
+    </main>
+  </body>
+</html>

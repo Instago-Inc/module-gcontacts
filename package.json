@@ -1,0 +1,17 @@
+{
+  "name": "@instago/gcontacts",
+  "version": "1.0.1",
+  "description": "Module gcontacts",
+  "main": "index.js",
+  "type": "commonjs",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "instago",
+    "gcontacts"
+  ],
+  "files": [
+    "index.js",
+    "ReadMe.MD",
+    "LICENSE"
+  ]
+}
