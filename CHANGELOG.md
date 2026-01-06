@@ -1,3 +1,9 @@
+## v1.0.2 - Docs refresh for Google Contacts helper
+The README and docs now highlight the gcontacts helper workflow, configuration, and People API usage so developers can find usage examples and env guidance faster.
+
+### Changed
+- Reworked prose across the README and docs to clarify descriptions, export lists, configuration hints, and sample calls for the Google Contacts helper.
+
 ## v1.0.1 - People API helpers
 Gcontacts now ships as a People API helper module that wraps contact and directory operations for faster integration into Instago apps.
 

@@ -59,62 +59,53 @@
   <body>
     <main>
       <h1>module/gcontacts - V8 module</h1>
-      <p class="intro">Google Contacts wrapper built on gauth@1.0.0 and People API.</p>
+      <p class="intro">Stay on top of your Google contacts with a small helper that keeps the workflow simple and focused. It is designed for quick lookups, updates, and directory searches without extra ceremony.</p>
       <p class="muted">Learn more at <a href="https://instago.ai" target="_blank" rel="noopener">https://instago.ai</a>.</p>
       <div class="section">
         <h2>Technical reference</h2>
-        <h1>@instago/gcontacts</h1>
-<p>Google Contacts wrapper built on <code>gauth@1.0.0</code> and People API.</p>
+        <h1>module/gcontacts - V8 module</h1>
+<p>Stay on top of your Google contacts with a small helper that keeps the workflow simple and focused. It is designed for quick lookups, updates, and directory searches without extra ceremony.</p>
+<p>Learn more about the platform at https://instago.ai.</p>
+<h2>Technical reference</h2>
+<p>Exports:</p>
 <ul>
-<li>Version: 1.0.0</li>
-<li>Entry: index.js</li>
-<li>Exports: <code>list</code>, <code>search</code>, <code>get</code>, <code>otherList</code>, <code>otherSearch</code>, <code>create</code>, <code>update</code>, <code>remove</code>, <code>directoryList</code>, <code>directorySearch</code></li>
-<li>Dependencies: <code>http@1.0.0</code>, <code>auth@1.0.0</code>, <code>gauth@1.0.0</code>, <code>qs@1.0.0</code></li>
+<li><code>list({ maxResults?, scope? })</code></li>
+<li><code>search({ query, maxResults?, scope? })</code></li>
+<li><code>get({ resourceNameOrEmail, scope? })</code></li>
+<li><code>otherList({ maxResults?, scope? })</code></li>
+<li><code>otherSearch({ query, maxResults?, scope? })</code></li>
+<li><code>create({ givenName?, familyName?, email?, phone?, scope? })</code></li>
+<li><code>update({ resourceName, givenName?, familyName?, email?, phone?, scope? })</code></li>
+<li><code>remove({ resourceName, scope? })</code></li>
+<li><code>directoryList({ maxResults?, scope? })</code></li>
+<li><code>directorySearch({ query, maxResults?, scope? })</code></li>
 </ul>
-<h2>Auth and configuration</h2>
-<p>You must configure <code>gauth@1.0.0</code> before using gcontacts. Provide the required env keys so the helper can mint tokens:</p>
+<p>Usage:</p>
+<pre class="code"><code>
+const gcontacts = require(&#x27;gcontacts@latest&#x27;);
+</code></pre>
+<p>Configuration (env.json):</p>
 <ul>
+<li>Required:</li>
 <li><code>gauth.clientId</code></li>
 <li><code>gauth.clientSecret</code></li>
+<li>Optional:</li>
+<li><code>gauth.scope</code></li>
+<li><code>gauth.tokenEndpoint</code></li>
+<li><code>google.scope</code></li>
 </ul>
-<p><code>gauth</code> handles refresh tokens internally, so there’s no need to expose them here.</p>
-<p>Optional env:</p>
-<ul>
-<li><code>gauth.scope</code> or <code>google.scope</code></li>
-<li><code>gauth.tokenEndpoint</code> (if you need a custom token URL)</li>
-</ul>
-<p>Common scopes:</p>
-<ul>
-<li><code>contacts</code> (rw), <code>contacts.readonly</code></li>
-<li><code>directory.readonly</code> (Workspace directory)</li>
-<li><code>all</code> or <code>*</code> for every mapped scope</li>
-</ul>
-<p>Configure once, then call gcontacts methods with the desired scope overrides.</p>
-<h2>Usage</h2>
+<p>Examples:</p>
 <pre class="code"><code>
-const gauth = require(&#x27;gauth@1.0.0&#x27;);
-const gcontacts = require(&#x27;gcontacts@1.0.0&#x27;);
+const gcontacts = require(&#x27;gcontacts@latest&#x27;);
 
-gauth.configure({
-  clientId: sys.env.get(&#x27;gauth.clientId&#x27;),
-  clientSecret: sys.env.get(&#x27;gauth.clientSecret&#x27;),
-});
-</code></pre>
-<h2>Examples</h2>
-<p>Personal contacts:</p>
-<pre class="code"><code>
 await gcontacts.list({ maxResults: 50 });
-await gcontacts.search({ query: &#x27;Ada&#x27;, maxResults: 50 });
+await gcontacts.search({ query: &#x27;Ada&#x27;, maxResults: 25 });
 await gcontacts.get({ resourceNameOrEmail: &#x27;people/123&#x27; });
 await gcontacts.get({ resourceNameOrEmail: &#x27;user@example.com&#x27; });
-</code></pre>
-<p>Other contacts:</p>
-<pre class="code"><code>
+
 await gcontacts.otherList({ maxResults: 50 });
-await gcontacts.otherSearch({ query: &#x27;John&#x27;, maxResults: 50 });
-</code></pre>
-<p>Create and update:</p>
-<pre class="code"><code>
+await gcontacts.otherSearch({ query: &#x27;John&#x27;, maxResults: 25 });
+
 await gcontacts.create({
   givenName: &#x27;John&#x27;,
   familyName: &#x27;Doe&#x27;,
@@ -129,15 +120,21 @@ await gcontacts.update({
 });
 
 await gcontacts.remove({ resourceName: &#x27;people/123&#x27; });
-</code></pre>
-<p>Directory (Workspace):</p>
-<pre class="code"><code>
+
 await gcontacts.directoryList({ maxResults: 50 });
-await gcontacts.directorySearch({ query: &#x27;Jane&#x27;, maxResults: 50 });
+await gcontacts.directorySearch({ query: &#x27;Jane&#x27;, maxResults: 25 });
 </code></pre>
-<p>--- For more details, visit https://instago.ai.</p>
       </div>
-      
+      <div class="section">
+  <h2>Changelog</h2>
+  <h2>v1.0.1 - People API helpers</h2>
+<p>Gcontacts now ships as a People API helper module that wraps contact and directory operations for faster integration into Instago apps.</p>
+<h3>Added</h3>
+<ul>
+<li>Initial set of helper operations for listing, searching, retrieving, creating, updating, and deleting Contacts via the People API.</li>
+<li>Support for otherContacts and directoryPeople endpoints so apps can work with peripheral and domain directory entries alongside the core contact list.</li>
+</ul>
+</div>
     </main>
   </body>
 </html>
