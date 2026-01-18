@@ -1,6 +1,6 @@
 # module/gcontacts - V8 module
 
-Stay on top of your Google contacts with a small helper that keeps the workflow simple and focused. It is designed for quick lookups, updates, and directory searches without extra ceremony.
+Keep contact lookups and lightweight updates simple with a focused helper that fits neatly into workflows. It is built for quick searches, adds, and changes without extra setup.
 
 Learn more about the platform at https://instago.ai.
 

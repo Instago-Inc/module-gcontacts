@@ -1,3 +1,10 @@
+## v1.0.3 - Clear gcontacts workflow copy
+The README, docs, and inline reference now spotlight how the gcontacts helper guides People API usage so devs can quickly find configuration tips and workflow examples.
+
+### Changed
+- Refreshed README/docs copy to describe the gcontacts helper workflow, People API support, and usage examples more clearly.
+- Updated the dependency comments to point at the latest http/auth/gauth/qs releases so the helper keeps pace with fresh modules.
+
 ## v1.0.2 - Docs refresh for Google Contacts helper
 The README and docs now highlight the gcontacts helper workflow, configuration, and People API usage so developers can find usage examples and env guidance faster.
 

@@ -1,4 +1,4 @@
-// Google Contacts (People API) helper using gauth@1.0.0.
+// Google Contacts (People API) helper using gauth@latest.
 //
 // API (selected):
 // - list({ maxResults?, scope? })
@@ -13,10 +13,10 @@
 // - directorySearch({ query, maxResults?, scope? })
 
 (function() {
-  const httpx = require('http@1.0.0');
-  const auth = require('auth@1.0.0');
-  const gauth = require('gauth@1.0.0');
-  const qs = require('qs@1.0.0');
+  const httpx = require('http@latest');
+  const auth = require('auth@latest');
+  const gauth = require('gauth@latest');
+  const qs = require('qs@latest');
 
   const PEOPLE_BASE = 'https://people.googleapis.com/v1';
   const DEFAULT_SCOPE = ['contacts'];
